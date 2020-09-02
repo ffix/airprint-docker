@@ -597,7 +597,6 @@ main()
 	#---
 
 	#---
-	exit 1
 	#---
 
 	C_install_printer_driver
