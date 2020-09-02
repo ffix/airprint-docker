@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:latest
 
 # Install the packages we need. Avahi will be included
 RUN apt-get update && apt-get install -y \
@@ -7,7 +7,9 @@ RUN apt-get update && apt-get install -y \
 	hplip \
 	inotify-tools \
 	python-cups \
-&& rm -rf /var/lib/apt/lists/*
+	openprinting-ppds \
+	printer-driver-gutenprint \
+	&& rm -rf /var/lib/apt/lists/*
 
 # This will use port 631
 EXPOSE 631
