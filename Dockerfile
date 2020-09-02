@@ -21,9 +21,9 @@ VOLUME /services
 # Install Canon UFRII Drivers
 ADD root /
 RUN chmod +x /root/*
-RUN chmod +x "/root/UFRII/*"
-RUN chmod +x "/root/UFRII/install.sh"
-RUN "/root/UFRII/install.sh"
+RUN chmod +x /root/UFRII/*
+RUN chmod +x /root/UFRII/install.sh
+RUN /root/UFRII/install.sh
 # Add scripts
 CMD ["/root/run_cups.sh"]
 
