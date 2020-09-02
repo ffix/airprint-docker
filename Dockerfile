@@ -21,9 +21,8 @@ VOLUME /services
 # Install Canon UFRII Drivers
 ADD root /
 RUN chmod +x /root/*
-RUN chmod +x /root/UFRII/*
-RUN chmod +x /root/UFRII/install.sh
-RUN /root/UFRII/install.sh
+RUN apt -y install \root\UFRII\32-bit_Driver\Debian\cndrvcups-common_4.10-1_i386.deb \root\UFRII\32-bit_Driver\Debian\cndrvcups-ufr2-uk_3.70-1_i386.deb 
+RUN apt -y install \root\UFRII\64-bit_Driver\Debian\cndrvcups-common_4.10-1_amd64.deb \root\UFRII\64-bit_Driver\Debian\cndrvcups-ufr2-uk_3.70-1_amd64.deb 
 # Add scripts
 CMD ["/root/run_cups.sh"]
 
