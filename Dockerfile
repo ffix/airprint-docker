@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 
 # Install the packages we need. Avahi will be included
 RUN apt-get update && apt-get install -y \
