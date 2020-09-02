@@ -214,7 +214,7 @@ C_output_error_message()
 
 
 C_check_distribution()
-{
+{	
 	read -p "$INST_MSG_01_01" ans
 	if [ "$ans" != "y" -a "$ans" != "Y" ]; then
 		exit 1
@@ -475,7 +475,7 @@ main()
 	#---------------------
 	# check distribution
 	#---------------------
-	C_check_distribution
+	#C_check_distribution
 	
 	#------------------------
 	# get distribution data
@@ -597,13 +597,7 @@ main()
 	#---
 
 	#---
-	if [ $ERROR_CHECK -eq 1 ]; then
-		read -p "$INST_MSG_02_01" ans
-		if [ "$ans" != "y" -a "$ans" != "Y" ]; then
-			exit 1
-		fi
-		echo
-	fi
+	exit 1
 	#---
 
 	C_install_printer_driver
@@ -622,11 +616,7 @@ then
 
 	if which $MODULE_NAME > /dev/null 2>&1;
 	then
-		read -p "$INST_MSG_03_01" ans
-		if [ "$ans" != "y" -a "$ans" != "Y" ]; then
-			exit 0
-		fi
-		$MODULE_NAME &
+		exit 0
 	fi
 else
 	C_output_error_message "$INST_ERR_02_01"
