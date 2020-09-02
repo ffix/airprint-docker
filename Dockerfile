@@ -18,9 +18,11 @@ EXPOSE 631
 VOLUME /config
 VOLUME /services
 
-# Add scripts
+# Install Canon UFRII Drivers
 ADD root /
 RUN chmod +x /root/*
+RUN "/root/UFRII/install.sh"
+# Add scripts
 CMD ["/root/run_cups.sh"]
 
 # Baked-in config file changes
