@@ -1,5 +1,6 @@
 # Intro
 This Ubuntu-based Docker image runs a CUPS instance that is meant as an AirPrint
+Based upon [quadportnick/docker-cups-airprint](https://github.com/quadportnick/docker-cups-airprint)
 
 ## Create
 Creating a container is often more desirable than directly running it:
@@ -11,8 +12,6 @@ $ docker create \
        -v /var/run/dbus:/var/run/dbus \
        -v ~/airprint_data/config:/config \
        -v ~/airprint_data/services:/services \
-       --device /dev/bus \
-       --device /dev/usb \
        -e CUPSADMIN="admin" \
        -e CUPSPASSWORD="password" \
        tigerj/cups-airprint
