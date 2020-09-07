@@ -2,7 +2,7 @@
 This Ubuntu-based Docker image runs a CUPS instance that is meant as an AirPrint
 Based upon [quadportnick/docker-cups-airprint](https://github.com/quadportnick/docker-cups-airprint)
 
-** IF YOU NEED ADDITIONAL DRIVERS ADDED, PLEASE CREATE AN ISSUE **
+**IF YOU NEED ADDITIONAL DRIVERS ADDED, PLEASE CREATE AN ISSUE**
 
 ## Create
 Creating a container is often more desirable than directly running it:
