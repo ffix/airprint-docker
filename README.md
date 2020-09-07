@@ -4,6 +4,26 @@ Based upon [quadportnick/docker-cups-airprint](https://github.com/quadportnick/d
 
 **IF YOU NEED ADDITIONAL DRIVERS ADDED, PLEASE CREATE AN ISSUE**
 
+## Compose
+Creating a container is often more desirable than directly running it:
+```
+  airprint:
+    image: firilith/airprint:latest
+    container_name: airprint
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - CUPSADMIN=ADMIN
+      - CUPSPASSWORD=Pa$$sw0rd
+    volumes:
+      - /config/airprint/services:/services
+      - /config/airprint:/config
+    ports:
+      - 631:631
+    restart: unless-stopped
+```
+
 ## Create
 Creating a container is often more desirable than directly running it:
 ```
@@ -11,9 +31,8 @@ $ docker create \
        --name=cups \
        --restart=always \
        --net=host \
-       -v /var/run/dbus:/var/run/dbus \
-       -v ~/airprint_data/config:/config \
-       -v ~/airprint_data/services:/services \
+       -v /config/airprint:/config \
+       -v /config/airprint/services:/services \
        -e CUPSADMIN="admin" \
        -e CUPSPASSWORD="password" \
        tigerj/cups-airprint
@@ -42,8 +61,6 @@ $ docker rm cups
    be generated
 * `-e CUPSADMIN`: the CUPS admin user you want created
 * `-e CUPSPASSWORD`: the password for the CUPS admin user
-* `--device /dev/bus`: device mounted for interacting with USB printers
-* `--device /dev/usb`: device mounted for interacting with USB printers
 
 ## Using
 CUPS will be configurable at http://localhost:631 using the
