@@ -1,5 +1,8 @@
 FROM ubuntu:xenial
 
+ENV DEBIAN_FRONTEND noninteractive apt-get -q -y install postfix
+
+
 # Install the packages we need. Avahi will be included
 RUN apt-get update && apt-get install -y \
 	cups \
