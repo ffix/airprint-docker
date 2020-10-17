@@ -37,3 +37,10 @@ RUN sed -i 's/Listen localhost:631/Listen 0.0.0.0:631/' /etc/cups/cupsd.conf && 
 	sed -i 's/<Location \/admin\/conf>/<Location \/admin\/conf>\n  Allow All/' /etc/cups/cupsd.conf && \
 	echo "ServerAlias *" >> /etc/cups/cupsd.conf && \
 	echo "DefaultEncryption Never" >> /etc/cups/cupsd.conf
+
+# Create symbolic links for Avahi
+RUN ln -s /services/* /etc/avahi/services/
+
+# Enable Avahi
+RUN /etc/init.d/dbus start
+RUN  /etc/init.d/avahi-daemon start
