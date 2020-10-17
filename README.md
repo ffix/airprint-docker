@@ -1,6 +1,9 @@
 # Intro
 This Ubuntu-based Docker image runs a CUPS instance that is meant as an AirPrint
 Based upon [quadportnick/docker-cups-airprint](https://github.com/quadportnick/docker-cups-airprint)
+We are using the "host" networking mode to easily passthrough the ports for printing. This can be changed to manually mapping all the ports.
+Be aware that mapping ports and the usage of "host" networking mode is not supported.
+If you have additional questions about this, don't hesitate to contact me.
 
 **IF YOU NEED ADDITIONAL DRIVERS ADDED, PLEASE CREATE AN ISSUE**
 
@@ -10,17 +13,17 @@ Creating a container is often more desirable than directly running it:
   airprint:
     image: firilith/airprint:latest
     container_name: airprint
+    network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
-      - CUPSADMIN=ADMIN
-      - CUPSPASSWORD=Pa$$sw0rd
+      - TZ=Europe/Brussels
+      - CUPSADMIN= #optional
+      - CUPSPASSWORD= #optional
     volumes:
-      - /config/airprint/services:/services
-      - /config/airprint:/config
-    ports:
-      - 631:631
+      - /media/config/airprint/services:/services
+      - /media/config/airprint:/config
+      - /var/run/dbus:/var/run/dbus
     restart: unless-stopped
 ```
 
