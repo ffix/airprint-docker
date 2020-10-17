@@ -72,6 +72,14 @@ CUPSADMIN/CUPSPASSWORD when you do something administrative.
 If the `/services` volume isn't mapping to `/etc/avahi/services` then you will
 have to manually copy the .service files to that path at the command line.
 
+```
+$ docker exec -it airprint /bin/bash
+$ cp /services/* /etc/avahi/services/
+$ /etc/init.d/dbus restart
+$ /etc/init.d/avahi-daemon restart
+$ exit
+$ exit
+```
 ## Notes
 * CUPS doesn't write out `printers.conf` immediately when making changes even
 though they're live in CUPS. Therefore it will take a few moments before the
