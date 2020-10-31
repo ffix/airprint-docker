@@ -32,6 +32,7 @@ RUN sed -i 's/Listen localhost:631/Listen 0.0.0.0:631/' /etc/cups/cupsd.conf && 
 	sed -i 's/<Location \/admin\/conf>/<Location \/admin\/conf>\n  Allow All/' /etc/cups/cupsd.conf && \
 	echo "ServerAlias *" >> /etc/cups/cupsd.conf && \
 	echo "DefaultEncryption Never" >> /etc/cups/cupsd.conf && \
-    ln -sf /services/ /etc/avahi/services/
+	rm -fd /etc/avahi/services/ && \
+	ln -sTf /services/ /etc/avahi/services
 
 ENTRYPOINT ["/root/entrypoint.sh"]
