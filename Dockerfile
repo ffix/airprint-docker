@@ -2,7 +2,6 @@ FROM ubuntu:xenial
 
 ENV DEBIAN_FRONTEND noninteractive apt-get -q -y install postfix
 
-
 # Install the packages we need. Avahi will be included
 RUN apt-get update && apt-get install -y \
 	cups \
@@ -20,13 +19,9 @@ EXPOSE 631
 # We want a mount for these
 VOLUME /config
 VOLUME /services
-	
-# Install Canon UFRII Drivers
-ADD root /
-RUN chmod +x /root/*
-RUN chmod +x /root/UFRII/*
-RUN /root/UFRII/install.sh
+
 # Add scripts
+ADD root /
 CMD ["/root/run_cups.sh"]
 
 # Baked-in config file changes
@@ -36,11 +31,7 @@ RUN sed -i 's/Listen localhost:631/Listen 0.0.0.0:631/' /etc/cups/cupsd.conf && 
 	sed -i 's/<Location \/admin>/<Location \/admin>\n  Allow All\n  Require user @SYSTEM/' /etc/cups/cupsd.conf && \
 	sed -i 's/<Location \/admin\/conf>/<Location \/admin\/conf>\n  Allow All/' /etc/cups/cupsd.conf && \
 	echo "ServerAlias *" >> /etc/cups/cupsd.conf && \
-	echo "DefaultEncryption Never" >> /etc/cups/cupsd.conf
+	echo "DefaultEncryption Never" >> /etc/cups/cupsd.conf && \
+    ln -sf /services/ /etc/avahi/services/
 
-# Create symbolic links for Avahi
-RUN ln -s /services/* /etc/avahi/services/
-
-# Enable Avahi
-RUN /etc/init.d/dbus start
-RUN  /etc/init.d/avahi-daemon start
+ENTRYPOINT ["/root/entrypoint.sh"]
